@@ -9,10 +9,7 @@ It includes two different methods:
 
 The method and possible applications are described in our paper.<br>
 
-Paper is accessible []()...
-
-_The content is uploaded with the acceptance of our paper._
-
+Paper is accessible [here (soon)]()...
 
 ## Documentation
 
@@ -45,7 +42,9 @@ cmake ..
 make
 ```
 
-`./ply2image`
+```
+./ply2image
+```
 
 ## Licence
 
@@ -59,8 +58,8 @@ If you use our Software in your academic work or project, please cite our paper:
 @article{Junger23,
       title={{Triangle-Mesh-Rasterization-Projection (TMRP): An algorithm to project a point cloud into a consistent and dense accurate 2D raster image}},
       author={Junger, Christina and Buch, Benjamin Roland and Notni, Gunther},
-      journal = {Measurement: Sensors},
-      note = {submitted on 04.07.2023},
+      journal = {Measurement: Sensors; Multimodal Data Fusion Technologies and Applications in Intelligent System},
+      note = {submitted on 04.07.2023; proofread on 07.08.2023},
       year={2023}
 }
 ```
