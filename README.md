@@ -2,8 +2,8 @@
 
 This program converts 3D point clouds in PLY file format to 2D image data in BBF or PNG file format.<br>
 It includes two different methods:
-- Triangle-Mesh-Rasterization-Projection (TMRP): A new way to project point clouds into a dense accurate 2D raster image
-- simple state-of-the-art projection
+- **Triangle-Mesh-Rasterization-Projection (TMRP):** A new way to project point clouds into a dense accurate 2D raster image
+- **simple state-of-the-art projection**
 
 ## Paper
 
@@ -34,7 +34,7 @@ Saving as PNG is lossy! The output is always a 16 bit grayscale image with alpha
 ## Usage
 
 ```
-mdkri build
+mkdir build
 cd build
 cmake ..
 make
