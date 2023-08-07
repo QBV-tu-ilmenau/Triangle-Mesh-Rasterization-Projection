@@ -76,9 +76,9 @@
      fit-margin-left="10"
      fit-margin-right="0"
      fit-margin-bottom="10"
-     inkscape:zoom="0.41328125"
-     inkscape:cx="1244.9149"
-     inkscape:cy="890.43478"
+     inkscape:zoom="0.20664063"
+     inkscape:cx="1163.8563"
+     inkscape:cy="212.93006"
      inkscape:window-x="1920"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -106,7 +106,7 @@
          aria-label="Conversion to depth map without raster"
          id="text886"
          style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
-         transform="translate(-281.85352)">
+         transform="translate(-321.76562)">
         <text
            xml:space="preserve"
            transform="translate(-272,34.786229)"
@@ -114,7 +114,9 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;white-space:pre;shape-inside:url(#rect446);fill:#000000;fill-opacity:1;stroke:none"><tspan
              x="569.37109"
              y="-53.087011"
-             id="tspan1571">Conversion to target image /o raster (simple state-of-the-art projection)</tspan></text>
+             id="tspan490">Conversion to target image w/o raster (<tspan
+   style="font-weight:bold;-inkscape-font-specification:'sans-serif, Bold'"
+   id="tspan488">simple state-of-the-art projection</tspan>)</tspan></text>
       </g>
       <g
          aria-label="Conversion to depth map without raster"
@@ -128,7 +130,9 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;white-space:pre;shape-inside:url(#rect446-2);display:inline;fill:#000000;fill-opacity:1;stroke:none"><tspan
              x="569.37109"
              y="-53.087011"
-             id="tspan1573">Conversion to target image w/ raster (TMRP)</tspan></text>
+             id="tspan494">Conversion to target image w/ raster (<tspan
+   style="font-weight:bold;-inkscape-font-specification:'sans-serif, Bold'"
+   id="tspan492">TMRP</tspan>)</tspan></text>
       </g>
       <image
          width="640"
@@ -164,7 +168,7 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;white-space:pre;shape-inside:url(#rect446-2-9);display:inline;fill:#000000;fill-opacity:1;stroke:none"><tspan
            x="569.37109"
            y="-53.087011"
-           id="tspan1575">min filter</tspan></text>
+           id="tspan496">min filter</tspan></text>
       <text
          xml:space="preserve"
          transform="translate(-11.490204,1499.6964)"
@@ -172,7 +176,7 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;white-space:pre;shape-inside:url(#rect446-2-9-8);display:inline;fill:#000000;fill-opacity:1;stroke:none"><tspan
            x="569.37109"
            y="-53.087011"
-           id="tspan1577">max filter</tspan></text>
+           id="tspan498">max filter</tspan></text>
       <text
          xml:space="preserve"
          transform="translate(621.80078,1499.6964)"
@@ -180,7 +184,7 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;white-space:pre;shape-inside:url(#rect446-2-9-7);display:inline;fill:#000000;fill-opacity:1;stroke:none"><tspan
            x="569.37109"
            y="-53.087011"
-           id="tspan1579">none filter</tspan></text>
+           id="tspan500">none filter</tspan></text>
     </g>
   </g>
 </svg>
