@@ -1,7 +1,22 @@
 # Triangle-Mesh-Rasterization-Projection
  A new way to project point clouds into a dense accurate 2D raster image
 
+## Paper
+
+Paper is accessible []()...
+
 _The content is uploaded with the acceptance of our paper._
+
+## Usage
+
+
+## Licence
+
+See [license](LICENSE.txt)
+
+**Reference**
+
+If you use our Software in your academic work or project, please cite our paper:
 
 ```
 @article{Junger23,
