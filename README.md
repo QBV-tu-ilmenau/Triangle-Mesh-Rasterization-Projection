@@ -61,3 +61,7 @@ If you use our Software in your academic work or project, please cite our paper:
       year={2023}
 }
 ```
+
+## Funding
+
+This research was funded by the Carl-Zeiss-Stiftung as part of the project [Engineering for Smart Manufacturing](https://www.e4sm-projekt.de/) (E4SM) – Engineering of machine learning-based assistance systems for data-intensive industrial scenarios.
