@@ -15,8 +15,6 @@ Paper is accessible [here (soon)]()...
 
 The `ply2image` app is a command line tool. Use `ply2image --help` to display the usage help.
 
-> For use under Linux: `./ply2image`
-
 For this, two of the PLY properties are interpreted as x and y pixel coordinates for the 2D image. A third PLY property is interpreted as the value of this pixel.
 
 By default, the x, y and z properties of the vertex element are used. This corresponds exactly to the conversion of a 3D point cloud into a depth map.
