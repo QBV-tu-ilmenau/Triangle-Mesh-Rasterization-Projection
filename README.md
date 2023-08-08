@@ -9,7 +9,7 @@ It includes two different methods:
 
 The method and possible applications are described in our paper.<br>
 
-Paper is accessible [here (soon)]()...
+Paper is accessible [here](https://www.mdpi.com/1424-8220/23/16/7030)
 
 ## Documentation
 
@@ -41,7 +41,7 @@ make
 ```
 
 ```
-./ply2image
+./ply2image --help
 ```
 
 ## Licence
@@ -53,14 +53,23 @@ See [license](LICENSE.txt)
 If you use our Software in your academic work or project, please cite our paper:
 
 ```
-@article{Junger23,
-      title={{Triangle-Mesh-Rasterization-Projection (TMRP): An algorithm to project a point cloud into a consistent and dense accurate 2D raster image}},
-      author={Junger, Christina and Buch, Benjamin Roland and Notni, Gunther},
-      journal = {Measurement: Sensors; Multimodal Data Fusion Technologies and Applications in Intelligent System},
-      note = {submitted on 04.07.2023; proofread on 07.08.2023},
-      year={2023}
+@Article{s23167030,
+  AUTHOR = {Junger, Christina and Buch, Benjamin and Notni, Gunther},
+  TITLE = {Triangle-Mesh-Rasterization-Projection (TMRP): An Algorithm to Project a Point Cloud onto a Consistent, Dense and Accurate 2D Raster Image},
+  JOURNAL = {Sensors},
+  VOLUME = {23},
+  YEAR = {2023},
+  NUMBER = {16},
+  ARTICLE-NUMBER = {7030},
+  URL = {https://www.mdpi.com/1424-8220/23/16/7030},
+  ISSN = {1424-8220},
+  DOI = {10.3390/s23167030}
 }
 ```
+
+**Abstract**
+
+The projection of a point cloud onto a 2D camera image is relevant in the case of various image analysis and enhancement tasks, e.g., (i) in multimodal image processing for data fusion, (ii) in robotic applications and in scene analysis, and (iii) for deep neural networks to generate real datasets with ground truth. The challenges of the current single-shot projection methods, such as simple state-of-the-art projection, conventional, polygon, and deep learning-based upsampling methods or closed source SDK functions of low-cost depth cameras, have been identified. We developed a new way to project point clouds onto a dense, accurate 2D raster image, called Triangle-Mesh-Rasterization-Projection (TMRP). The only gaps that the 2D image still contains with our method are valid gaps that result from the physical limits of the capturing cameras. Dense accuracy is achieved by simultaneously using the 2D neighborhood information (rx,ry) of the 3D coordinates in addition to the points P(X,Y,V). In this way, a fast triangulation interpolation can be performed. The interpolation weights are determined using sub-triangles. Compared to single-shot methods, our algorithm is able to solve the following challenges. This means that: (1) no false gaps or false neighborhoods are generated, (2) the density is XYZ independent, and (3) ambiguities are eliminated. Our TMRP method is also open source, freely available on GitHub, and can be applied to almost any sensor or modality. We also demonstrate the usefulness of our method with four use cases by using the KITTI-2012 dataset or sensors with different modalities. Our goal is to improve recognition tasks and processing optimization in the perception of transparent objects for robotic manufacturing processes.
 
 ## Funding
 
