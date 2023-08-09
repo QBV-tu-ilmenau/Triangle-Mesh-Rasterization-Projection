@@ -1,6 +1,6 @@
 # Triangle-Mesh-Rasterization-Projection
 
-This program converts 3D point clouds in PLY file format to 2D image data in BBF or PNG file format.<br>
+This program converts 3D point clouds in PLY file format to 2D image data in [BBF](doc/BBF.md) or PNG file format.<br>
 It includes two different methods:
 - **Triangle-Mesh-Rasterization-Projection (TMRP):** A new way to project point clouds into a dense accurate 2D raster image
 - **simple state-of-the-art projection**
@@ -27,7 +27,7 @@ The raster information can also be used to cleanly separate foreground and backg
 
 ![conversions with no/raster and raster filters](doc/image/results_example.svg)
 
-By default, the output image is stored in BBF file format with 64-bit floating point values in the native byte order of the program's current execution environment. Empty pixels are encoded as NaN (Not a Number). The BBF specification is linked above. It is a simple raw data format with a 24 bytes header.
+By default, the output image is stored in BBF file format with 64-bit floating point values in the native byte order of the program's current execution environment. Empty pixels are encoded as NaN (Not a Number). The BBF specification is described [here](doc/BBF.md). It is a simple raw data format with a 24 bytes header.
 
 Saving as PNG is lossy! The output is always a 16 bit grayscale image with alpha channel. The pixel values range is truncated to 0 to 65535, no overflow or underflow takes place! All pixel values are rounded half up to integers. Fixed point values can be emulated via the value scaling. For example, to emulate 4 binary decimal places, the scaling must be set to 16 (=2^4). However, this information is not stored in the image! So when reading the PNG file later, you have to take care by yourself to interpret the values as fixed-point numbers again!
 
