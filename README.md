@@ -31,6 +31,10 @@ By default, the output image is stored in BBF file format with 64-bit floating p
 
 Saving as PNG is lossy! The output is always a 16 bit grayscale image with alpha channel. The pixel values range is truncated to 0 to 65535, no overflow or underflow takes place! All pixel values are rounded half up to integers. Fixed point values can be emulated via the value scaling. For example, to emulate 4 binary decimal places, the scaling must be set to 16 (=2^4). However, this information is not stored in the image! So when reading the PNG file later, you have to take care by yourself to interpret the values as fixed-point numbers again!
 
+## Required libraries
+
+See [libraries](doc/setup.md)
+
 ## Usage
 
 ```
