@@ -14,7 +14,7 @@ git clone https://github.com/QBV-tu-ilmenau/Triangle-Mesh-Rasterization-Projecti
 
 ### Command line argument parsing
 
-- [argparse](https://github.com/p-ranav/argparse) (if you not already use Qt, Boost or OpenCV)
+- [argparse](https://github.com/p-ranav/argparse) (command line argument parsing)
 - [Boost](https://www.boost.org/)
 
 ### File formats
