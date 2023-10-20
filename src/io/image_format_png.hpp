@@ -1,29 +1,20 @@
 #pragma once
 
-#include "bitmap/bitmap.hpp"
-#include "bitmap/pixel.hpp"
-#include "bitmap/masked_pixel.hpp"
-
-#include <boost/endian.hpp>
+#include <bitmap/bitmap.hpp>
+#include <bitmap/pixel.hpp>
+#include <bitmap/masked_pixel.hpp>
 
 #include <png.h>
 
-#include <concepts>
-#include <csetjmp>
-#include <cstdint>
-#include <filesystem>
-#include <fstream>
-#include <functional>
-#include <iomanip>
 #include <limits>
-#include <sstream>
-#include <string_view>
+#include <concepts>
+#include <filesystem>
+#include <iomanip>
+#include <fstream>
 
 
 namespace bmp::png{
 
-
-    using namespace std::literals;
 
     struct g1{
         using value_type = bool;
@@ -34,79 +25,79 @@ namespace bmp::png{
     };
 
     struct g8{
-        using value_type = boost::endian::big_uint8_buf_t;
+        using value_type = std::uint8_t;
         static constexpr int channels = PNG_COLOR_TYPE_GRAY;
         static constexpr int bit_depth = 8;
 
-        boost::endian::big_uint8_buf_t g;
+        std::uint8_t g;
     };
 
     struct g16{
-        using value_type = boost::endian::big_uint16_buf_t;
+        using value_type = std::uint16_t;
         static constexpr int channels = PNG_COLOR_TYPE_GRAY;
         static constexpr int bit_depth = 16;
 
-        boost::endian::big_uint16_buf_t g;
+        std::uint16_t g;
     };
 
     struct ga8{
-        using value_type = boost::endian::big_uint8_buf_t;
+        using value_type = std::uint8_t;
         static constexpr int channels = PNG_COLOR_TYPE_GRAY_ALPHA;
         static constexpr int bit_depth = 8;
 
-        boost::endian::big_uint8_buf_t g;
-        boost::endian::big_uint8_buf_t a;
+        std::uint8_t g;
+        std::uint8_t a;
     };
 
     struct ga16{
-        using value_type = boost::endian::big_uint16_buf_t;
+        using value_type = std::uint16_t;
         static constexpr int channels = PNG_COLOR_TYPE_GRAY_ALPHA;
         static constexpr int bit_depth = 16;
 
-        boost::endian::big_uint16_buf_t g;
-        boost::endian::big_uint16_buf_t a;
+        std::uint16_t g;
+        std::uint16_t a;
     };
 
     struct rgb8{
-        using value_type = boost::endian::big_uint8_buf_t;
+        using value_type = std::uint8_t;
         static constexpr int channels = PNG_COLOR_TYPE_RGB;
         static constexpr int bit_depth = 8;
 
-        boost::endian::big_uint8_buf_t r;
-        boost::endian::big_uint8_buf_t g;
-        boost::endian::big_uint8_buf_t b;
+        std::uint8_t r;
+        std::uint8_t g;
+        std::uint8_t b;
     };
 
     struct rgb16{
-        using value_type = boost::endian::big_uint16_buf_t;
+        using value_type = std::uint16_t;
         static constexpr int channels = PNG_COLOR_TYPE_RGB;
         static constexpr int bit_depth = 16;
 
-        boost::endian::big_uint16_buf_t r;
-        boost::endian::big_uint16_buf_t g;
-        boost::endian::big_uint16_buf_t b;
+        std::uint16_t r;
+        std::uint16_t g;
+        std::uint16_t b;
     };
 
     struct rgba8{
-        using value_type = boost::endian::big_uint8_buf_t;
+        using value_type = std::uint8_t;
         static constexpr int channels = PNG_COLOR_TYPE_RGB_ALPHA;
         static constexpr int bit_depth = 8;
 
-        boost::endian::big_uint8_buf_t r;
-        boost::endian::big_uint8_buf_t g;
-        boost::endian::big_uint8_buf_t b;
-        boost::endian::big_uint8_buf_t a;
+        std::uint8_t r;
+        std::uint8_t g;
+        std::uint8_t b;
+        std::uint8_t a;
     };
 
     struct rgba16{
-        using value_type = boost::endian::big_uint16_buf_t;
+        using value_type = std::uint16_t;
         static constexpr int channels = PNG_COLOR_TYPE_RGB_ALPHA;
         static constexpr int bit_depth = 16;
 
-        boost::endian::big_uint16_buf_t r;
-        boost::endian::big_uint16_buf_t g;
-        boost::endian::big_uint16_buf_t b;
-        boost::endian::big_uint16_buf_t a;
+        std::uint16_t r;
+        std::uint16_t g;
+        std::uint16_t b;
+        std::uint16_t a;
     };
 
 
@@ -135,9 +126,9 @@ namespace bmp::png{
 
         template <typename From>
         constexpr To operator()(From const& pixel)const{
-            return To(static_cast<typename To::value_type>(pixel));
+            return To(static_cast<typename To::value_type const&>(pixel));
         }
-    };
+    }
 
     template <ga_pixel To>
     struct access_ga{
@@ -146,18 +137,17 @@ namespace bmp::png{
         template <typename From>
         constexpr To operator()(From const& pixel)const{
             return To(
-                static_cast<typename To::value_type>(pixel.g),
-                static_cast<typename To::value_type>(pixel.a));
+                static_cast<typename To::value_type const&>(pixel.g),
+                static_cast<typename To::value_type const&>(pixel.a));
         }
+    }
 
-        template <typename From>
-        constexpr To operator()(pixel::basic_masked_pixel<From> const& pixel)const{
-            return To(
-                static_cast<typename To::value_type>(pixel.v),
-                static_cast<typename To::value_type>(
-                    pixel.m ? 0 : std::numeric_limits<typename To::value_type::value_type>::max()));
-        }
-    };
+    template <ga_pixel To> template <typename From>
+    constexpr To access_ga<To>::operator()<basic_masked_pixel<From>>(basic_masked_pixel<From> const& pixel)const{
+        return To(
+            static_cast<typename To::value_type const&>(pixel.v),
+            pixel.m ? 0 : std::numeric_limits<typename To::value_type>::max());
+    }
 
     template <rgb_pixel To>
     struct access_rgb{
@@ -166,11 +156,11 @@ namespace bmp::png{
         template <typename From>
         constexpr To operator()(From const& pixel)const{
             return To(
-                static_cast<typename To::value_type>(pixel.r),
-                static_cast<typename To::value_type>(pixel.g),
-                static_cast<typename To::value_type>(pixel.b));
+                static_cast<typename To::value_type const&>(pixel.r),
+                static_cast<typename To::value_type const&>(pixel.g),
+                static_cast<typename To::value_type const&>(pixel.b));
         }
-    };
+    }
 
     template <rgba_pixel To>
     struct access_rgba{
@@ -179,25 +169,22 @@ namespace bmp::png{
         template <typename From>
         constexpr To operator()(From const& pixel)const{
             return To(
-                static_cast<typename To::value_type>(pixel.r),
-                static_cast<typename To::value_type>(pixel.g),
-                static_cast<typename To::value_type>(pixel.b),
-                static_cast<typename To::value_type>(pixel.a));
+                static_cast<typename To::value_type const&>(pixel.r),
+                static_cast<typename To::value_type const&>(pixel.g),
+                static_cast<typename To::value_type const&>(pixel.b),
+                static_cast<typename To::value_type const&>(pixel.a));
         }
+    }
 
-        template <typename From>
-        constexpr To operator()(pixel::basic_masked_pixel<From> const& pixel)const{
-            return To(
-                static_cast<typename To::value_type>(pixel.v.r),
-                static_cast<typename To::value_type>(pixel.v.g),
-                static_cast<typename To::value_type>(pixel.v.b),
-                static_cast<typename To::value_type>(
-                    pixel.m ? 0 : std::numeric_limits<typename To::value_type::value_type>::max()));
-        }
-    };
+    template <rgba_pixel To> template <typename From>
+    constexpr To access_rgba<To>::operator()<basic_masked_pixel<From>>(basic_masked_pixel<From> const& pixel)const{
+        return To(
+            static_cast<typename To::value_type const&>(pixel.v),
+            pixel.m ? 0 : std::numeric_limits<typename To::value_type>::max());
+    }
 
 
-    struct pixel_type_not_supported_by_png{};
+    struct pixel_type_not_supported_by_png;
 
 
     template <typename Pixel> inline constexpr auto pixel_access = pixel_type_not_supported_by_png{};
@@ -209,37 +196,30 @@ namespace bmp::png{
     template <> inline constexpr auto pixel_access<std::int16_t> = access_g<g16>{};
     template <> inline constexpr auto pixel_access<std::uint16_t> = access_g<g16>{};
 
-    template <> inline constexpr auto pixel_access<pixel::ga8> = access_ga<ga8>{};
-    template <> inline constexpr auto pixel_access<pixel::ga8u> = access_ga<ga8>{};
-    template <> inline constexpr auto pixel_access<pixel::ga16> = access_ga<ga16>{};
-    template <> inline constexpr auto pixel_access<pixel::ga16u> = access_ga<ga16>{};
+    template <> inline constexpr auto pixel_access<pixel::ga8> = access_ga<g8>{};
+    template <> inline constexpr auto pixel_access<pixel::ga8u> = access_ga<g8>{};
+    template <> inline constexpr auto pixel_access<pixel::ga16> = access_ga<g16>{};
+    template <> inline constexpr auto pixel_access<pixel::ga16u> = access_ga<g16>{};
 
-    template <> inline constexpr auto pixel_access<pixel::rgb8> = access_rgb<rgb8>{};
-    template <> inline constexpr auto pixel_access<pixel::rgb8u> = access_rgb<rgb8>{};
-    template <> inline constexpr auto pixel_access<pixel::rgb16> = access_rgb<rgb16>{};
-    template <> inline constexpr auto pixel_access<pixel::rgb16u> = access_rgb<rgb16>{};
+    template <> inline constexpr auto pixel_access<pixel::rgb8> = access_rgb<g8>{};
+    template <> inline constexpr auto pixel_access<pixel::rgb8u> = access_rgb<g8>{};
+    template <> inline constexpr auto pixel_access<pixel::rgb16> = access_rgb<g16>{};
+    template <> inline constexpr auto pixel_access<pixel::rgb16u> = access_rgb<g16>{};
 
-    template <> inline constexpr auto pixel_access<pixel::rgba8> = access_rgba<rgba8>{};
-    template <> inline constexpr auto pixel_access<pixel::rgba8u> = access_rgba<rgba8>{};
-    template <> inline constexpr auto pixel_access<pixel::rgba16> = access_rgba<rgba16>{};
-    template <> inline constexpr auto pixel_access<pixel::rgba16u> = access_rgba<rgba16>{};
+    template <> inline constexpr auto pixel_access<pixel::rgba8> = access_rgba<g8>{};
+    template <> inline constexpr auto pixel_access<pixel::rgba8u> = access_rgba<g8>{};
+    template <> inline constexpr auto pixel_access<pixel::rgba16> = access_rgba<g16>{};
+    template <> inline constexpr auto pixel_access<pixel::rgba16u> = access_rgba<g16>{};
 
-    template <> inline constexpr auto pixel_access<pixel::masked_g8> = access_ga<ga8>{};
-    template <> inline constexpr auto pixel_access<pixel::masked_g8u> = access_ga<ga8>{};
-    template <> inline constexpr auto pixel_access<pixel::masked_g16> = access_ga<ga16>{};
-    template <> inline constexpr auto pixel_access<pixel::masked_g16u> = access_ga<ga16>{};
+    template <> inline constexpr auto pixel_access<pixel::masked_g8> = access_ga<g8>{};
+    template <> inline constexpr auto pixel_access<pixel::masked_g8u> = access_ga<g8>{};
+    template <> inline constexpr auto pixel_access<pixel::masked_g16> = access_ga<g16>{};
+    template <> inline constexpr auto pixel_access<pixel::masked_g16u> = access_ga<g16>{};
 
-    template <> inline constexpr auto pixel_access<pixel::masked_rgb8> = access_rgba<rgba8>{};
-    template <> inline constexpr auto pixel_access<pixel::masked_rgb8u> = access_rgba<rgba8>{};
-    template <> inline constexpr auto pixel_access<pixel::masked_rgb16> = access_rgba<rgba16>{};
-    template <> inline constexpr auto pixel_access<pixel::masked_rgb16u> = access_rgba<rgba16>{};
-
-
-    inline std::string quoted(std::string const& text){
-        std::ostringstream os;
-        os << std::quoted(text);
-        return os.str();
-    }
+    template <> inline constexpr auto pixel_access<pixel::masked_rgb8> = access_rgba<g8>{};
+    template <> inline constexpr auto pixel_access<pixel::masked_rgb8u> = access_rgba<g8>{};
+    template <> inline constexpr auto pixel_access<pixel::masked_rgb16> = access_rgba<g16>{};
+    template <> inline constexpr auto pixel_access<pixel::masked_rgb16u> = access_rgba<g16>{};
 
 
     class writer{
@@ -256,8 +236,8 @@ namespace bmp::png{
         template <typename T>
         bool write(bitmap<T> const& image, std::filesystem::path const& filepath){
             std::ofstream os(filepath, std::ios::binary);
-            if(!os.is_open()){
-                throw std::runtime_error("can not open file " + quoted(filepath.string()));
+            if(!os.open()){
+                throw std::runtime_error(std::format("can not open file {:s}", std::quoted(filepath.string())));
             }
 
             return write(image, os);
@@ -292,18 +272,18 @@ namespace bmp::png{
             }
 
             // libpng will jump to this condition if an error occurs
-            if(setjmp(png_jmpbuf(main_))){
+            if(std::setjmp(::png_jmpbuf(main_))){
                 return false;
             }
 
             ::png_set_write_fn(main_, &os, &write_data, &flush_data);
 
-            auto const w = image.template w_as<std::int32_t>();
-            auto const h = image.template h_as<std::int32_t>();
+            auto const w = image.w_as<std::int32_t>()
+            auto const h = image.h_as<std::int32_t>()
 
-            using pixel_type = decltype(pixel_access<T>)::target_type;
+            using pixel_type = pixel_access<T>::target_type;
             ::png_set_IHDR(main_, info_, w, h, pixel_type::bit_depth, pixel_type::channels,
-                PNG_INTERLACE_ADAM7, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
+                PNG_INTERLACE_ADAM7, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT)
 
             // TODO: Implement some direct access instead of copy for types which support this
             std::vector<pixel_type> data;
@@ -313,10 +293,10 @@ namespace bmp::png{
                     return pixel_access<T>(v);
                 });
 
-            std::vector<::png_byte*> rows;
+            std::vector<pixel_type const*> rows;
             rows.reserve(h);
-            for(std::size_t y = 0; y < static_cast<std::size_t>(h); ++y){
-                rows.push_back(reinterpret_cast<::png_byte*>(&data[y * w]));
+            for(std::size_t y = 0; y < h; ++y){
+                rows.push_back(&data[y * w]);
             }
 
             ::png_set_rows(main_, info_, rows.data());
@@ -326,11 +306,11 @@ namespace bmp::png{
             return true;
         }
 
-        void on_error(std::function<void(std::string_view)> callable)noexcept{
+        void on_error(std::function<void(std::string_view)noexcept> callable)noexcept{
             error_callable_ = std::move(callable);
         }
 
-        void on_warning(std::function<void(std::string_view)> callable)noexcept{
+        void on_warning(std::function<void(std::string_view)noexcept> callable)noexcept{
             warning_callable_ = std::move(callable);
         }
 
@@ -342,14 +322,14 @@ namespace bmp::png{
             info_ = nullptr;
         }
 
-        [[noreturn]] static void error(::png_struct* main, char const* message)noexcept{
+        static [[noreturn]] void error(::png_struct* main, char const* message)noexcept{
             auto const& callable = static_cast<writer const*>(::png_get_error_ptr(main))->error_callable_;
             if(callable){
                 callable(std::string_view(message));
             }
 
             // libpng requires the error handler to jump back to our write routine
-            std::longjmp(png_jmpbuf(main), -1);
+            std::longjmp(::png_jmpbuf(main), -1);
         }
 
         static void warn(::png_struct* main, char const* message)noexcept{
@@ -365,8 +345,8 @@ namespace bmp::png{
             if(!os.good()){
                 error(png, "std::ostream::write() failed");
             }
-        }catch(std::exception const& e){
-            error(png, e.what());
+        }catch(std::exception const& error){
+            error(png, error.what());
         }catch(...){
             error(png, "write_data: unknown error");
         }
@@ -377,8 +357,8 @@ namespace bmp::png{
             if(!os.good()){
                 error(png, "std::ostream::flush() failed");
             }
-        }catch(std::exception const& e){
-            error(png, e.what());
+        }catch(std::exception const& error){
+            error(png, error.what());
         }catch(...){
             error(png, "flush_data: unknown error");
         }

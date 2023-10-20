@@ -1,8 +1,8 @@
 #include "ply.hpp"
 #include "image_format_png.hpp"
 
-#include <bitmap/bitmap.hpp>
-#include <bitmap/binary_write.hpp>
+#include "bitmap/bitmap.hpp"
+#include "bitmap/binary_write.hpp"
 
 #include <fmt/color.h>
 
