@@ -19,5 +19,5 @@ git clone https://github.com/QBV-tu-ilmenau/Triangle-Mesh-Rasterization-Projecti
 
 ### File formats
 
-- [bitmap](https://github.com/bebuch/bitmap)
 - [libpng](http://www.libpng.org/pub/png/libpng.html)
+- No longer necessary: Now the [bitmap](https://github.com/bebuch/bitmap) lib is part of the project.
