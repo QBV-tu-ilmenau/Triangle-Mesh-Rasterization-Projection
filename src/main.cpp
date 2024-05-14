@@ -254,7 +254,7 @@ namespace ply2image{
         auto const b = distance(t[1], t[2]);
         auto const c = distance(t[2], t[0]);
         auto const s = (a + b + c) / 2.;
-        return std::sqrt(s * (s - a) * (s - b) * (s - a));
+        return std::sqrt(s * (s - a) * (s - b) * (s - c));
     }
 
     constexpr bool is_inside(std::array<raster_point, 3> const& t, bmp::point<double> const& p){
